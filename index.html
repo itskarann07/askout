@@ -7,24 +7,66 @@
     <body>
         <div class="container">
             <div >
-                <h1 class = "header_text">Do you wanna go out with me?</h1>
+                <h1 class = "header_text">Are we going for the movie tommorow?</h1>
             </div>
             <div class="gif_container">
-                <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
+                <img src="https://media1.giphy.com/media/fZF9svAIFKuCmbqLYm/giphy.gif?cid=ecf05e4701jczlrm80f3he6v4rfg3znv2db15yvesou5j857&ep=v1_stickers_search&rid=giphy.gif&ct=s">
             </div>
             <div class = "buttons">
-                <button class="btn" id = "yesButton" onclick="nextPage()">Yes</button>
+                <button class="btn" id = "yesButton" onclick="nextPage()" onmouseover="hideNoImg()">Yes</button>
                 <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
+                <img src="https://media4.giphy.com/media/GuAyo258Gj8m7UXYLg/giphy.gif?cid=ecf05e47sx9m00314xmdz6znwaa94qe2zv6neibof7moqkxo&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt=""
+                height="80px" width="80px" style="display: none;" id="replacementImage">
+                <img src="https://media3.giphy.com/media/a8yQ78qONgObZ8nJHC/giphy.gif?cid=ecf05e47gli9v0xrwck6tl9v9dsdrkbsmq6iwok03wsdv0pe&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt=""
+                height="80px" width="80px" style="display: none;" id="yesImg">
                 <script>
                     function nextPage() {
                         window.location.href = "yes.html";
                     }
                     
                     function moveButton() {
-                        var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth) - 85;
-                        var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight) - 48;
-                        document.getElementById('noButton').style.left = `${x}px`;
-                        document.getElementById('noButton').style.top = `${y}px`;
+                            let noButton = document.getElementById('noButton');
+                            let img = document.getElementById('replacementImage');
+                            let yesImg= document.getElementById('yesImg');
+                            yesImg.style.display='none';
+
+                            // Store the current position of the "No" button
+                            let currentTop = noButton.style.top;
+                            let currentLeft = noButton.style.left;
+
+                            // Hide the "No" button
+                            noButton.style.display = 'none';
+
+                            // Set the position of the image to match the "No" button's previous position
+                            img.style.position = 'absolute'; // Ensure that the image position is set to 'absolute'
+                            img.style.top = currentTop;
+                            img.style.left = currentLeft;
+
+                            // Show the image
+                            img.style.display = 'block';
+
+                            // Generate new random position for the "No" button
+                            let x = Math.random() * (window.innerWidth - noButton.offsetWidth) - 85;
+                            let y = Math.random() * (window.innerHeight - noButton.offsetHeight) - 48;
+
+                            // Set the new position for the "No" button
+                            noButton.style.left = `${x}px`;
+                            noButton.style.top = `${y}px`;
+                            noButton.style.display = 'block';
+                        }
+                    
+                    function hideNoImg(){
+                        let img = document.getElementById('replacementImage');
+                        let yesImg= document.getElementById('yesImg');
+
+                        let currentTop = img.style.top;
+                        let currentLeft = img.style.left;
+
+                        img.style.display='none';
+                        yesImg.style.top=currentTop;
+                        yesImg.style.left=currentLeft;
+
+                        yesImg.style.display='block';
                     }
                 </script> 
             </div>
